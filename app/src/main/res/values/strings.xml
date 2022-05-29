@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">bd_App_TFC_Alberto</string>
+    <string name="butlogin">Entrar</string>
+    <string name="butregister">Registrar</string>
+    <string name="hintemail">Correo</string>
+    <string name="hintPass">Contraseña</string>
+    <string name="hintConfirmPas">Confirmar contraseña</string>
+</resources>
