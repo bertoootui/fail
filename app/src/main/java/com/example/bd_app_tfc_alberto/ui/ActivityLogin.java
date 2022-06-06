@@ -82,14 +82,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                 String email = edtemail.getText().toString();
                 String pass = edtpass.getText().toString();
-                byte [] passdata = new byte[0];
-                try {
-                    passdata = pass.getBytes("UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                String password = Base64.encodeToString(passdata,Base64.DEFAULT);
-                String confirm = login_db.getLogin(email,password);
+                String confirm = login_db.getLogin(email,pass);
 
                 switch (confirm)
                 {

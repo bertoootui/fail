@@ -48,7 +48,7 @@ public class Login_DB extends SQLiteOpenHelper {
     {
 
 
-        String password1 = MD5_Hash(password);
+        String password1 = md5(password);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("email",email);
@@ -60,7 +60,7 @@ public class Login_DB extends SQLiteOpenHelper {
     public String getLogin(String email, String password)
     {
 
-        String password1 = MD5_Hash(password);
+        String password1 = md5(password);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT email, password FROM login WHERE email = ?",new String[]{email});
@@ -84,17 +84,23 @@ public class Login_DB extends SQLiteOpenHelper {
     }
 
 
-    public static String MD5_Hash(String s) {
-        MessageDigest m = null;
+    private static String md5(String s) { try {
 
-        try {
-            m = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        // Create MD5 Hash
+        MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+        digest.update(s.getBytes());
+        byte messageDigest[] = digest.digest();
 
-        m.update(s.getBytes(),0,s.length());
-        String hash = new BigInteger(1, m.digest()).toString(16);
-        return hash;
+        // Create Hex String
+        StringBuffer hexString = new StringBuffer();
+        for (int i=0; i<messageDigest.length; i++)
+            hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+        return hexString.toString();
+
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+        return "";
+
     }
 }
