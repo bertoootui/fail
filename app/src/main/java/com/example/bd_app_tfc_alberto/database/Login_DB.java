@@ -22,6 +22,7 @@ public class Login_DB extends SQLiteOpenHelper {
     private static final String ID = "id";
     private static final String EMAIL = "email";
     private static final String PASSWORD = "password";
+    private static final String TYPE = "type";
 
 
     public Login_DB(@Nullable Context context) {
@@ -33,6 +34,7 @@ public class Login_DB extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE "+ TABLE_NAME +" ("+
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 EMAIL + " VARCHAR UNIQUE,"+
+                TYPE + " VARCHAR,"+
                 PASSWORD +" VARCHAR)");
     }
 
